@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	
+	<meta name="Keywords" content="">
+	<meta name="description" content="">
+
+    <title>blog</title>
+	<link rel="stylesheet" href="https://files.cnblogs.com/files/amang/cstlye.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+
+
+
+</head>
+<body>
+	
+	<div id="cpc" class="cpc">
+		<!-- header -->
+		<header class="ctopnar clearfix">
+
+            <a :href="homeUrl">
+                <div class="logo left">
+                    <p class="name" v-html="header.name"></p>
+                    <em v-html="header.ssss"></em>
+                </div>
+            </a>
+
+
+			<nav class="cnav">
+				<ul>
+                    <!-- 当前页则active -->
+					<li v-for="(n,index) in header.navUrl"><a :href="header.navUrl[index]" v-html="header.navText[index]"></a></li>
+				</ul>
+			</nav>
+
+			<div class="csearch right">
+				<div class="csearch-sbox">
+					<!-- <div class="csearch-sbox-inp"><input type="text"></div> -->
+					<span class="csearch-sbox-btn"><i class="iconfont icon-search"></i></span>
+				</div>
+				<ul class="csearch-list">
+					<li>登录<i></i></li>
+					<li><i></i></li>
+					<li><i></i></li>
+				</ul>
+			</div>
+
+		</header>
+
+
+		<div id="cmain" class="cmain">
+			<!-- list -->
+			<section class="clist left">
+				<article class="clist-row" v-for="(n,index) in mainContent.name">
+					<h1 class="clist-title"><a :href="mainContent.url[index]" v-html="n"></a></h1>
+					<div class="clist-aside">
+						<span v-html="mainContent.data[index]"></span>
+						<span v-html="mainContent.read[index]"></span>
+						<span v-html="mainContent.comment[index]"></span>
+					</div>
+					<div class="clist-info">
+						<p v-html="mainContent.abstract[index]"></p>
+					</div>
+				</article>
+
+				<!-- 分页 -->
+				<div class="cpages">
+					<ul class="cpages-list">
+						<li class="cpages-disabled"><a href="javascript:;">&lt;</a></li>
+						<li class="active"><a href="javascript:;">1</a></li>
+						<li><a href="javascript:;">2</a></li>
+						<li><a href="javascript:;">3</a></li>
+						<li><a href="javascript:;">4</a></li>
+						<li><a href="javascript:;">5</a></li>
+						<li class="cpages-disabled cpages-omit"><a href="javascript:;">...</a></li>
+						<li><a href="javascript:;">30</a></li>
+						<li><a href="javascript:;">&gt;</a></li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- 侧边 -->
+			<div class="cslide right">
+
+				<!-- 公告 -->
+				<section class="cgongg cside" v-if="hide">
+					<h1 class="cgongg-title omit">webpack介绍 安装 常用命令</h1>
+					<div class="cgongg-info">
+						本篇部分摘录于 webpack中文入门指南-模块系统 & webpack dev server Webpack是一款用户打包前端模块的工具，它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。主要是用来打包在浏览器端使用的javascript的。同时也能转换、捆绑、打
+					</div>
+					<span class="ctuij">推荐</span>
+				</section>
+
+				<!-- 文章分类 -->
+				<section class="sidety cwzfl cside">
+					<h3 class="sidety-title">文章分类</h3>
+					<ul class="cwzfl-list clearfix">
+						<li v-for="(n,index) in sideBar.classifyText" class="left"><a :href="sideBar.classifyUrl[index]" class="wh omit" v-html="n"></a></li>
+					</ul>
+				</section>
+
+				<!-- 排行榜 -->
+				<section class="sidety cphb cside">
+					<h3 class="sidety-title">阅读排行榜</h3>
+					<ul class="cphb-list clearfix">
+						<li v-for="(n,index) in sideBar.readTopText" class="omit"><a :href="sideBar.readTopUrl[index]" class="wh" v-html="n"></a></li>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		<!-- 底部 -->
+		<footer class="cfooter">
+			<p>Copyright&copy; 2016-2017 {{header.name}}</p>
+			<p>本站大部分内容来自互联网,若侵犯您权益请留言</p>
+		</footer>
+	</div>
+
+
+    <!-- 以下是模板 -->
+    <div id="home">
+        <div id="header">
+            <div id="blogTitle">
+                <a id="lnkBlogLogo" href="http://www.cnblogs.com/amang/"><img id="blogLogo" src="" alt="返回主页"></a>
+
+                <!--done-->
+                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/amang/">深以为然</a></h1>
+                <h2>web新手</h2>
+
+
+
+
+            </div><!--end: blogTitle 博客的标题和副标题 -->
+            <div id="navigator">
+
+                <ul id="navList">
+                    <li></li>
+                    <li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/amang/">首页</a></li>
+                    <li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+                    <li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%B7%B1%E4%BB%A5%E4%B8%BA%E7%84%B6">联系</a></li>
+                    <li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/amang/rss">订阅</a>
+                        <!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/amang/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+                    <li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+                </ul>
+                <div class="blogStats">
+
+                    <div id="blog_stats">
+                        <span id="stats_post_count">随笔 - 7&nbsp; </span>
+                        <span id="stats_article_count">文章 - 0&nbsp; </span>
+                        <span id="stats-comment_count">评论 - 0</span>
+                    </div>
+
+                </div><!--end: blogStats -->
+            </div><!--end: navigator 博客导航栏 -->
+        </div><!--end: header 头部 -->
+
+        <div id="main">
+            <div id="mainContent">
+                <div class="forFlow">
+
+
+                    <!--done-->
+
+
+                    <div class="day">
+                        <div class="dayTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl00_ImageLink" href="http://www.cnblogs.com/amang/archive/2017/08/02.html">2017年8月2日</a>
+                        </div>
+
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl00_DayList_TitleUrl_0" class="postTitle2" href="http://www.cnblogs.com/amang/p/7274972.html">整理的前端注意事项和笔记</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: /*谷歌浏览器10像素字体（适用微信浏览器）*/ font-size:14px; -webkit-transform:scale(0.71); transform:scale(0.71); //点击div以外,div消失 $('.search-a').on('click',function(e){ $('#condition').slideDown(200); e...<a href="http://www.cnblogs.com/amang/p/7274972.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2017-08-02 17:11 深以为然 阅读(9) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7274972" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                        <div class="postSeparator"></div>
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl00_DayList_TitleUrl_1" class="postTitle2" href="http://www.cnblogs.com/amang/p/7273709.html">移动端长按事件操作</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: 之前在公司项目上用到长按，也用过jq mobile，好像与后端用的冲突，就没用。 这个是长按当前的，当前DOM操作。 布局 样式 js<a href="http://www.cnblogs.com/amang/p/7273709.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2017-08-02 14:28 深以为然 阅读(9) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7273709" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                    </div>
+
+
+                    <div class="day">
+                        <div class="dayTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl01_ImageLink" href="http://www.cnblogs.com/amang/archive/2017/07/13.html">2017年7月13日</a>
+                        </div>
+
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl01_DayList_TitleUrl_0" class="postTitle2" href="http://www.cnblogs.com/amang/p/7160307.html">针对于微信浏览器css初始化重置</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: 在网上找了很久，有结合自己做的<a href="http://www.cnblogs.com/amang/p/7160307.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2017-07-13 14:27 深以为然 阅读(8) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7160307" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                    </div>
+
+
+                    <div class="day">
+                        <div class="dayTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl02_ImageLink" href="http://www.cnblogs.com/amang/archive/2017/07/12.html">2017年7月12日</a>
+                        </div>
+
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl02_DayList_TitleUrl_0" class="postTitle2" href="http://www.cnblogs.com/amang/p/7153788.html">html强制不换行，超出省略</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: 在html中有时候难免遇到不想让文字换行，尤其是在移动端，尺寸很小，会做超出显示省略号的效果<a href="http://www.cnblogs.com/amang/p/7153788.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2017-07-12 09:32 深以为然 阅读(7) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7153788" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                        <div class="postSeparator"></div>
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl02_DayList_TitleUrl_1" class="postTitle2" href="http://www.cnblogs.com/amang/p/7153775.html">清楚浮动最好用的方法</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: 这个方法是谁浮动了，清除谁，比clear:both好用<a href="http://www.cnblogs.com/amang/p/7153775.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2017-07-12 09:30 深以为然 阅读(5) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7153775" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                        <div class="postSeparator"></div>
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl02_DayList_TitleUrl_2" class="postTitle2" href="http://www.cnblogs.com/amang/p/7153767.html">html5新属性placeholder</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: html中有一个描述输入文字，可以js实现，但是没有这个好用控制placeholder样式<a href="http://www.cnblogs.com/amang/p/7153767.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2017-07-12 09:27 深以为然 阅读(11) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7153767" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                    </div>
+
+
+                    <div class="day">
+                        <div class="dayTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl03_ImageLink" href="http://www.cnblogs.com/amang/archive/2016/12/18.html">2016年12月18日</a>
+                        </div>
+
+
+                        <div class="postTitle">
+                            <a id="homepage1_HomePageDays_DaysList_ctl03_DayList_TitleUrl_0" class="postTitle2" href="http://www.cnblogs.com/amang/p/6194341.html">我的博客开通了</a>
+                        </div>
+                        <div class="postCon"><div class="c_b_p_desc">摘要: 我的博客开通了<a href="http://www.cnblogs.com/amang/p/6194341.html" class="c_b_p_desc_readmore">阅读全文</a></div></div>
+                        <div class="clear"></div>
+                        <div class="postDesc">posted @ 2016-12-18 13:35 深以为然 阅读(9) 评论(0)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=6194341" rel="nofollow">编辑</a></div>
+                        <div class="clear"></div>
+
+                    </div>
+
+                    <div class="topicListFooter"></div>
+
+
+                </div><!--end: forFlow -->
+            </div><!--end: mainContent 主体内容容器-->
+
+            <div id="sideBar">
+                <div id="sideBarMain">
+
+                    <!--done-->
+                    <div class="newsItem">
+                        <h3 class="catListTitle">公告</h3>
+                        <div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/amang/">深以为然</a><br>园龄：<a href="http://home.cnblogs.com/u/amang/" title="入园时间：2016-10-06">1年</a><br>粉丝：<a href="http://home.cnblogs.com/u/amang/followers/">0</a><br>关注：<a href="http://home.cnblogs.com/u/amang/followees/">0</a><div id="p_b_follow"></div></div></div><script type="text/javascript"></script>
+                    </div>
+
+                    <div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
+                        <tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+                            <tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2017/09/01');return false;">&lt;</a></td><td align="center">2017年10月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2017/11/01');return false;">&gt;</a></td></tr>
+                            </tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td class="CalTodayDay" align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+                        </tbody></table></div><script type="text/javascript"></script>
+
+                    <div id="leftcontentcontainer">
+                        <div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_shortcut" class="sidebar-block">
+                            <div class="catListLink">
+                                <h3 class="catListTitle">常用链接</h3>
+                                <ul>
+                                    <li><a href="http://www.cnblogs.com/amang/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/amang/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/amang/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/amang/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/amang/tag/" title="我的博客的标签列表">我的标签</a></li>
+                                </ul>
+                                <div id="itemListLin_con" style="display:none;">
+                                    <ul>
+
+                                    </ul>
+                                </div>
+                            </div></div><div id="sidebar_toptags" class="sidebar-block">
+                            <div class="catListTag">
+                                <h3 class="catListTitle">我的标签</h3>
+                                <ul>
+                                    <li><a href="http://www.cnblogs.com/amang/tag/css/">css</a>(2)</li><li><a href="http://www.cnblogs.com/amang/tag/css%E5%88%9D%E5%A7%8B%E5%8C%96/">css初始化</a>(1)</li><li><a href="http://www.cnblogs.com/amang/tag/html%E5%BC%BA%E5%88%B6%E4%B8%8D%E6%8D%A2%E8%A1%8C/">html强制不换行</a>(1)</li><li><a href="http://www.cnblogs.com/amang/tag/%E7%A7%BB%E5%8A%A8%E9%95%BF%E6%8C%89%E4%BA%8B%E4%BB%B6/">移动长按事件</a>(1)</li>
+                                </ul>
+                            </div></div><div id="sidebar_categories">
+                            <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+                                <h3 class="catListTitle">随笔分类</h3>
+
+                                <ul>
+
+                                    <li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/amang/category/1033337.html">CSS(2)</a> </li>
+
+                                    <li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/amang/category/1033338.html">HTML(2)</a> </li>
+
+                                    <li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/amang/category/1033336.html">JavaScript(1)</a> </li>
+
+                                    <li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/amang/category/1095614.html">vue</a> </li>
+
+                                    <li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/amang/category/1047507.html">移动端</a> </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+                                <h3 class="catListTitle">随笔档案</h3>
+
+                                <ul>
+
+                                    <li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/amang/archive/2017/08.html">2017年8月 (2)</a> </li>
+
+                                    <li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/amang/archive/2017/07.html">2017年7月 (4)</a> </li>
+
+                                    <li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/amang/archive/2016/12.html">2016年12月 (1)</a> </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap" style="display: none;">
+                            <div class="catListComment">
+                                <h3 class="catListTitle">最新评论</h3>
+
+                                <div id="RecentCommentsBlock"></div>
+                            </div>
+                        </div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+                            <div class="catListView">
+                                <h3 class="catListTitle">阅读排行榜</h3>
+                                <div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/amang/p/7153767.html">1. html5新属性placeholder(11)</a></li><li><a href="http://www.cnblogs.com/amang/p/7273709.html">2. 移动端长按事件操作(9)</a></li><li><a href="http://www.cnblogs.com/amang/p/6194341.html">3. 我的博客开通了(9)</a></li><li><a href="http://www.cnblogs.com/amang/p/7274972.html">4. 整理的前端注意事项和笔记(9)</a></li><li><a href="http://www.cnblogs.com/amang/p/7160307.html">5. 针对于微信浏览器css初始化重置(8)</a></li></ul></div>
+                            </div>
+                        </div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap" style="display: none;">
+                            <div class="catListFeedback">
+                                <h3 class="catListTitle">评论排行榜</h3>
+                                <div id="TopFeedbackPostsBlock"></div>
+                            </div>
+                        </div></div></div><script type="text/javascript"></script>
+                    </div>
+
+                </div><!--end: sideBarMain -->
+            </div><!--end: sideBar 侧边栏容器 -->
+            <div class="clear"></div>
+        </div><!--end: main -->
+        <div id="footer">
+
+            <!--done-->
+            Copyright ©2017 深以为然
+        </div>
+    </div>
+
+	
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+    $('body').addClass('body_bg');
+    var app = new Vue({
+        el:'#cpc',
+        data:{
+            homeUrl     : '',   //url
+            header      : {},   //头部
+            mainContent : {},   //列表
+            sideBar     : {},   // 侧边栏
+            footer      : {},
+            hide        : false
+        },
+        created(){
+            let _this = this;
+            let currentBlogApp = 'amang';
+
+            //请求侧边栏
+            loadBlogSideColumn();
+            function loadBlogSideColumn() {
+                $("#blog-sidecolumn").length && $.ajax({
+                    url: "/" + currentBlogApp + "/mvc/blog/sidecolumn.aspx",
+                    data: {
+                        blogApp: currentBlogApp
+                    },
+                    type: "get",
+                    dataType: "text",
+                    success: function (n) {
+                        $("#blog-sidecolumn").html(n);
+                        loadBlogSideBlocks();
+                    }
+                })
+            }
+
+            function loadBlogSideBlocks() {
+                var n = [];
+                document.getElementById("RecentCommentsBlock") && n.push("ShowRecentComment");
+                document.getElementById("TopViewPostsBlock") && n.push("ShowTopViewPosts");
+                document.getElementById("TopFeedbackPostsBlock") && n.push("ShowTopFeedbackPosts");
+                document.getElementById("TopDiggPostsBlock") && n.push("ShowTopDiggPosts");
+                $.ajax({
+                    url: "/mvc/Blog/GetBlogSideBlocks.aspx",
+                    data: {
+                        blogApp: currentBlogApp,
+                        showFlag: n.join(",")
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function (n) {
+                        n && (n.RecentComments ? $("#RecentCommentsBlock").html(n.RecentComments) : $("#recent_comments_wrap").hide(), n.TopViewPosts ? $("#TopViewPostsBlock").html(n.TopViewPosts) : $("#topview_posts_wrap").hide(), n.TopFeedbackPosts ? $("#TopFeedbackPostsBlock").html(n.TopFeedbackPosts) : $("#topfeedback_posts_wrap").hide(), n.TopDiggPosts ? $("#TopDiggPostsBlock").html(n.TopDiggPosts) : $("#topdigg_posts_wrap").hide())
+                        _set();
+                    }
+                })
+            }
+
+            function _set(){
+
+                let home = $('#home');
+                let header = home.children('#header'); //头部
+                let mainContent = home.find('#mainContent'); //列表
+                let sideBar = home.find('#sideBar'); // 侧边栏
+                let footer = home.find('#footer'); // 底部
+
+
+                // home url
+                _this.homeUrl = header.find('#lnkBlogLogo').attr('href');
+
+                // 头部
+                _this.nav = header.find('#navList li a');
+                _this.nav.navText = [];
+                _this.nav.navUrl = [];
+                $.each(_this.nav,function(i,n){
+                    _this.nav.navText.push($(this).html());
+                    _this.nav.navUrl.push($(this).attr('href'));
+                });
+                _this.header = {
+                    name    :   header.find('#Header1_HeaderTitle').html(),
+                    ssss    :   header.find('#blogTitle h2').html(),
+                    url     :   header.find('#Header1_HeaderTitle').attr('href'),
+                    navText :   _this.nav.navText,
+                    navUrl  :   _this.nav.navUrl
+                };
+
+                // 主体列表
+                _this.mainContent          = mainContent.find('.day .postTitle a');
+                _this.mainContent.name     = [];
+                _this.mainContent.url      = [];
+                _this.mainContent.abstract = [];
+                _this.mainContent.data     = [];
+                _this.mainContent.info     = [];
+                _this.mainContent.author   = [];
+                _this.mainContent.read     = [];
+                _this.mainContent.comment  = [];
+
+                $.each(_this.mainContent,function(i){
+                    _this.mainContent.name.push($(this).html());
+                    _this.mainContent.url.push($(this).attr('href'));
+                    var str1 = mainContent.find('.postCon .c_b_p_desc').eq(i).text();
+                    str1 = str1.replace('阅读全文','');
+                    _this.mainContent.abstract.push(str1);
+
+                    var str2 = mainContent.find('.day .postDesc').eq(i).text();
+                    str2 = str2.split(' ');
+                    _this.mainContent.info.push(str2);
+                    _this.mainContent.data.push(_this.mainContent.info[i][2]);
+                    _this.mainContent.author.push(_this.mainContent.info[i][4]);
+                    _this.mainContent.read.push(_this.mainContent.info[i][5]);
+                    _this.mainContent.comment.push(_this.mainContent.info[i][6]);
+                });
+                _this.mainContent = {
+                    name    :   _this.mainContent.name, //标题名称
+                    url     :   _this.mainContent.url, //网址
+                    data    :   _this.mainContent.data, //日期
+                    abstract:   _this.mainContent.abstract, //摘要
+                    author  :   _this.mainContent.author, //作者
+                    read    :   _this.mainContent.read, //阅读
+                    comment :   _this.mainContent.comment,  //评论
+                    info    :   _this.mainContent.info
+                };
+
+
+                // 主体侧边
+                _this.sideBar = {};
+
+                //随笔分类
+                //sideGet('#sidebar_postcategory ul li a','classify','classifyText','classifyUrl');
+                _this.sideBar.classify = sideBar.find('#sidebar_postcategory ul li a');
+                _this.sideBar.classifyText = [];
+                _this.sideBar.classifyUrl = [];
+                $.each(_this.sideBar.classify,function(i){
+                    _this.sideBar.classifyText.push(_this.sideBar.classify.eq(i).text());
+                    _this.sideBar.classifyUrl.push(_this.sideBar.classify.eq(i).attr('href'));
+                });
+
+                //阅读排行
+                _this.sideBar.readTop = sideBar.find('#TopViewPostsBlock ul li a');
+                _this.sideBar.readTopText = [];
+                _this.sideBar.readTopUrl  = [];
+                $.each(_this.sideBar.classify,function(i){
+                    _this.sideBar.readTopText.push(_this.sideBar.readTop.eq(i).text());
+                    _this.sideBar.readTopUrl.push(_this.sideBar.readTop.eq(i).attr('href'));
+                });
+
+                //sideGet('#TopViewPostsBlock ul li a','readTop','objText','objUrl');
+                function sideGet(_label,_obj,objText,objUrl){
+                    _this.sideBar._obj = sideBar.find(_label);
+                    _this.sideBar.objText = [];
+                    _this.sideBar.objUrl  = [];
+                    $.each(_this.sideBar.classify,function(i){
+                        _this.sideBar.objText.push(_this.sideBar._obj.eq(i).text());
+                        _this.sideBar.objUrl.push(_this.sideBar._obj.eq(i).attr('href'));
+                    });
+                }
+
+                _this.sideBar = {
+                    classifyText   :  _this.sideBar.classifyText,   //随笔分类内容
+                    classifyUrl    :  _this.sideBar.classifyUrl,    //随笔分类链接
+                    readTopText    :  _this.sideBar.readTopText,    //阅读排行榜内容
+                    readTopUrl     :  _this.sideBar.readTopUrl      //阅读排行榜链接
+                };
+            }
+
+
+
+        }
+
+    })
+
+</script>
